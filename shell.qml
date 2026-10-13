@@ -39,11 +39,20 @@ ShellRoot {
             ColumnLayout {
                 id: content
 
-                Text {
-                    text: timeSource.day
-                    color: "#FFFFFF"
-                    font.family: "Metropolis Black"
-                    font.pointSize: 60
+                RowLayout {
+                    Text {
+                        text: timeSource.day
+                        color: "#FFFFFF"
+                        font.family: "Metropolis Black"
+                        font.pointSize: 60
+                    }
+
+                    Text {
+                        text: "."
+                        color: "#7fff00"
+                        font.family: "Metropolis Black"
+                        font.pointSize: 60
+                    }
                 }
 
                 Text {
