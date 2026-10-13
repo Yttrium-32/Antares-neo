@@ -16,7 +16,11 @@ RowLayout {
 
         FileView {
             id: weatherJson
-            path: Qt.resolvedUrl("./weather.json")
+            path: "./weather.json"
+
+            watchChanges: true
+            onFileChanged: reload()
+
             blockLoading: true
         }
 
@@ -40,7 +44,7 @@ RowLayout {
              "13d": "" ,
              "13n": "" ,
              "50d": "" ,
-             "50n": "" 
+             "50n": ""
         }
 
         function getIcon(iconId: string): string {
@@ -50,7 +54,7 @@ RowLayout {
         Text {
             id: iconText
             anchors.centerIn: parent
-            text: content.getIcon(content.weatherData.weather[0].icon)
+            text: content.iconIdMap[content.weatherData.weather[0].icon]
             color: "#7fff00"
             font.family: "Weather Icons"
             font.pointSize: 17
