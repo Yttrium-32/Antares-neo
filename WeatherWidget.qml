@@ -1,25 +1,63 @@
+import Quickshell
 import Quickshell.Widgets
+import Quickshell.Io
 import QtQuick.Layouts
 import QtQuick
 
 RowLayout {
-    id: content
-
     Rectangle {
-        color: "teal"
+        id: content
+        color: "transparent"
 
         implicitWidth: iconText.width + 5
         implicitHeight: iconText.height + 5
 
         Layout.margins: 10
 
+        FileView {
+            id: weatherJson
+            path: Qt.resolvedUrl("./weather.json")
+            blockLoading: true
+        }
+
+        readonly property var weatherData: JSON.parse(weatherJson.text())
+
+        property var iconIdMap: {
+             "01d": "" ,
+             "01n": "" ,
+             "02d": "" ,
+             "02n": "" ,
+             "03d": "" ,
+             "03n": "" ,
+             "04d": "" ,
+             "04n": "" ,
+             "09d": "" ,
+             "09n": "" ,
+             "10d": "" ,
+             "10n": "" ,
+             "11d": "" ,
+             "11n": "" ,
+             "13d": "" ,
+             "13n": "" ,
+             "50d": "" ,
+             "50n": "" 
+        }
+
+        function getIcon(iconId: string): string {
+            return iconIdMap[iconId]
+        }
+
         Text {
             id: iconText
             anchors.centerIn: parent
-            text: "Icon"
+            text: content.getIcon(content.weatherData.weather[0].icon)
             color: "#7fff00"
-            font.family: "Metropolis Black"
+            font.family: "Weather Icons"
             font.pointSize: 17
+        }
+
+        Component.onCompleted: {
+            console.log(getIcon(weatherData.weather[0].icon))
         }
     }
 
