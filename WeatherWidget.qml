@@ -47,10 +47,6 @@ RowLayout {
              "50n": ""
         }
 
-        function getIcon(iconId: string): string {
-            return iconIdMap[iconId]
-        }
-
         Text {
             id: iconText
             anchors.centerIn: parent
@@ -58,10 +54,6 @@ RowLayout {
             color: "#7fff00"
             font.family: "Weather Icons"
             font.pointSize: 17
-        }
-
-        Component.onCompleted: {
-            console.log(getIcon(weatherData.weather[0].icon))
         }
     }
 
