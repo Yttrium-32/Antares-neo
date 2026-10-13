@@ -62,9 +62,18 @@ ShellRoot {
                     font.pointSize: 15
                 }
 
-                WeatherWidget{
+                WeatherWidget {
                     id: weatherWidget
-                    Layout.margins: 20
+                    Layout.topMargin: 11
+                    Layout.bottomMargin: 19
+                }
+
+                Rectangle {
+                    width: 300
+                    height: 1
+                    color: "#FFFFFF"
+
+                    Layout.bottomMargin: 10
                 }
 
                 Text {
