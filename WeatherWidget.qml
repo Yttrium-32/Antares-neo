@@ -8,17 +8,11 @@ RowLayout {
     id: content
     FileView {
         id: weatherJson
-        path: "./weather.json"
+        path: Quickshell.env("XDG_CACHE_HOME") + "/weather.json"
 
         watchChanges: true
         onFileChanged: reload()
 
-        blockLoading: true
-    }
-
-    FileView {
-        id: configJson
-        path: "./config.json"
         blockLoading: true
     }
 

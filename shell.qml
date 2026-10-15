@@ -1,14 +1,31 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Io
 import Quickshell
 
 ShellRoot {
     Time { id: timeSource }
+
+    Process {
+        id: weatherProc
+        command: ["sh", "-c", "./weather.sh"]
+        running: true
+    }
+
+    Timer {
+        // Run every hour
+        interval: 3600000
+
+        running: true
+        repeat: true
+        onTriggered: weatherProc.running = true
+    }
+
     Variants {
         model: Quickshell.screens
 
         PanelWindow {
-            id: w
+            id: window
 
             property var modelData
             screen: modelData
