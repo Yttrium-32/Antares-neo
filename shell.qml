@@ -4,7 +4,7 @@ import Quickshell.Io
 import Quickshell
 
 ShellRoot {
-    Time { id: timeSource }
+    TimeComponent { id: timeSource }
 
     Process {
         id: weatherProc
@@ -33,13 +33,13 @@ ShellRoot {
             aboveWindows: false
 
             anchors {
-                right: true
+                left: true
                 bottom: true
             }
 
             margins {
                 right: 50
-                left: 50
+                left: 100
                 bottom: 150
             }
 
