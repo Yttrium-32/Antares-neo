@@ -87,9 +87,9 @@ ShellRoot {
                     width: 300
                     height: 1
                     color: "#FFFFFF"
-
-                    Layout.bottomMargin: 10
                 }
+
+                SystemMonitorWidget { id: systemMonitorWidget }
 
                 Text {
                     text: "Time is " + timeSource.time
