@@ -1,8 +1,11 @@
+pragma Singleton
+
 import Quickshell
 import QtQuick
 
-Scope {
-    id: root
+Singleton {
+    id: timeRoot
+
     readonly property string day: {
         Qt.formatDateTime(clock.date, "dddd")
     }

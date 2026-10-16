@@ -4,8 +4,6 @@ import Quickshell.Io
 import Quickshell
 
 ShellRoot {
-    TimeComponent { id: timeSource }
-
     Process {
         id: weatherProc
         command: ["sh", "-c", "./weather.sh"]
@@ -56,7 +54,7 @@ ShellRoot {
 
                 RowLayout {
                     Text {
-                        text: timeSource.day
+                        text: Time.day
                         color: "#FFFFFF"
                         font.family: "Metropolis Black"
                         font.pointSize: 60
@@ -71,7 +69,7 @@ ShellRoot {
                 }
 
                 Text {
-                    text: timeSource.date
+                    text: Time.date
                     color: "#FFFFFF"
                     font.family: "Cantarell"
                     font.pointSize: 15
@@ -92,7 +90,7 @@ ShellRoot {
                 SystemMonitorWidget { id: systemMonitorWidget }
 
                 Text {
-                    text: "Time is " + timeSource.time
+                    text: "Time is " + Time.time
                     color: "#FFFFFF"
                     font.family: "Metropolis Medium"
                     font.pointSize: 14
