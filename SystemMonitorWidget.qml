@@ -1,8 +1,10 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Io
 
 RowLayout {
     id: monitorRoot
+    property int memPerc: 0
 
     Ring {
         id: cpuMonitor
@@ -25,6 +27,28 @@ RowLayout {
         Layout.leftMargin: 5
     }
 
+    Process {
+        id: memProc
+        command: [
+            "awk",
+            "/^MemTotal:/ {total = $2} /^MemAvailable:/ {available = $2} END { used = total - available; perc = (used / total) * 100; printf \"%.0f\", perc}",
+            "/proc/meminfo"
+        ]
+
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: monitorRoot.memPerc = parseInt(this.text)
+        }
+    }
+
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        onTriggered: memProc.running = true
+    }
+
     Ring {
         id: memMonitor
 
@@ -33,7 +57,7 @@ RowLayout {
         centerX: 26
         centerY: 38
 
-        angle: 90
+        angle: 360 * (monitorRoot.memPerc / 100)
 
         Layout.leftMargin: 23
     }
@@ -41,7 +65,7 @@ RowLayout {
     Text {
         id: memMonitorText
 
-        text: "Mem:\n0%"
+        text: "Mem:\n" + monitorRoot.memPerc + "%"
 
         color: "#FFFFFF"
         font.family: "Cantarell"
